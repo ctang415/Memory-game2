@@ -7,7 +7,8 @@ function App() {
   const [ score, setScore ] = useState(0)
   const [ highScore, setHighScore ] = useState(0)
   const [ pokemonList, setPokemonList ] = useState([])
-      let api = false;
+  const [ cards, setCards ] = useState([])
+  let api = false;
 
   const checkScore = () => {
     if (score > highScore) {
@@ -15,6 +16,31 @@ function App() {
     }
   }
 
+  const shuffle = (array) => {
+    array.sort(() => Math.random() - 0.5)
+  }
+
+  const clickCard = (e) => {
+    if (cards.includes(e.target.id)) {
+      setScore(0)
+      setCards([])
+      checkScore()
+    } else {
+      setCards(x => [...x, e.target.id])
+      setScore(score + 1)
+      shuffle(pokemonList)
+    }
+    console.log(cards)
+  }
+
+  useEffect(() => {
+    if (score === 16) {
+      setHighScore(score)
+      setScore(0)
+      setCards([])
+      alert('You clicked them all!')
+    }
+  }, [score])
 
   useEffect(() => {
     if (!api) {
@@ -38,7 +64,7 @@ function App() {
   return (
     <div className='app'>
       <Instruction score={score} highScore={highScore} />
-      <Card pokemonList={pokemonList} />
+      <Card clickCard={clickCard} pokemonList={pokemonList} />
     </div>
   )
 }
