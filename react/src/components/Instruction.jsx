@@ -1,4 +1,5 @@
 
+
 const Instruction = ( {score, highScore} ) => {
 
     return (
@@ -10,11 +11,13 @@ const Instruction = ( {score, highScore} ) => {
                 How to play: Click on all 16 Pokemon cards to win - but be careful! 
                 The cards will change position each time you select one.
             </h3>
-            <h5>Score: {score} </h5>
+            <h4>Score: {score} </h4>
             <h5>High Score: {highScore}</h5>
         </>
     )
 
 }
+
+
 
 export default Instruction
